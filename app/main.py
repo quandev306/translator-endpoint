@@ -3,6 +3,10 @@ from fastapi.responses import JSONResponse
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch, os, re, json
 from typing import Any
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
 
 
 class UnicodeJSONResponse(JSONResponse):
@@ -14,9 +18,20 @@ class UnicodeJSONResponse(JSONResponse):
 
 app = FastAPI(title="NLLB EN→VI (fixed lang ids)", default_response_class=UnicodeJSONResponse)
 
-MODEL = os.getenv("MODEL_NAME", "facebook/nllb-200-distilled-600M")
+if load_dotenv:
+    load_dotenv()
+
+DEFAULT_MODEL = "facebook/nllb-200-distilled-600M"
+MODEL = os.getenv("TRANSLATOR_MODEL") or os.getenv("MODEL_NAME") or DEFAULT_MODEL
 SRC = "eng_Latn"
 TGT = "vie_Latn"
+MAX_INPUT_LENGTH_ENV = os.getenv("MAX_INPUT_LENGTH", "512")
+try:
+    MAX_INPUT_LENGTH = int(MAX_INPUT_LENGTH_ENV)
+except ValueError as exc:
+    raise RuntimeError("MAX_INPUT_LENGTH must be an integer.") from exc
+if MAX_INPUT_LENGTH <= 0:
+    raise RuntimeError("MAX_INPUT_LENGTH must be a positive integer.")
 
 # 👉 Dùng slow tokenizer để có lang_code_to_id
 tokenizer = AutoTokenizer.from_pretrained(MODEL, use_fast=False)
@@ -143,7 +158,12 @@ def translate(
     with torch.no_grad():
         tokenizer.src_lang = src
         enc = tokenizer(
-            text_value, return_tensors="pt", padding=True, truncation=True, max_length=512, src_lang=src
+            text_value,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+            max_length=MAX_INPUT_LENGTH,
+            src_lang=src,
         )
         gen = model.generate(
             **enc,

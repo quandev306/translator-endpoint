@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y git && \
         "protobuf>=3.20,<6.0" \
         torch torchvision torchaudio \
         transformers sentencepiece \
-        fastapi uvicorn && \
+        fastapi uvicorn python-dotenv && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

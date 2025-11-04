@@ -14,6 +14,8 @@ Centralized documentation with localized guides.
 - Multilingual translation service built with FastAPI and Hugging Face NLLB-200 models.
 - Distributed as a Docker/Docker Compose setup listening on `http://localhost:1111`.
 - API endpoint `GET /translate` accepts `q`, `src`, and `tgt` query parameters.
+- Configure via environment variables such as `TRANSLATOR_MODEL`/`MODEL_NAME` and `MAX_INPUT_LENGTH`.
+- Supports loading these variables from a `.env` file (python-dotenv).
 
 ## Contributing Translations
 1. Copy an existing `README.<lang>.md` file as a template.

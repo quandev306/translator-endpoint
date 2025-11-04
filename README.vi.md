@@ -38,7 +38,9 @@ Phản hồi mẫu:
 ```
 
 ## Cấu hình nâng cao
-- Đặt `MODEL_NAME` để thay mô hình, ví dụ `MODEL_NAME=facebook/nllb-200-distilled-1.3B`.
+- Đặt `TRANSLATOR_MODEL` (hoặc `MODEL_NAME`) để thay mô hình, ví dụ `TRANSLATOR_MODEL=facebook/nllb-200-distilled-1.3B`.
+- Đặt `MAX_INPUT_LENGTH` để giới hạn số token đầu vào (mặc định 512).
+- Có thể khai báo các biến này trong file `.env` (ứng dụng tự động nạp bằng python-dotenv).
 - Container tự động phát hiện các mã ngôn ngữ hợp lệ từ tokenizer; nếu `src` hoặc `tgt` không nằm trong danh sách này, API sẽ trả lỗi HTTP 400.
 
 ## Ghi chú

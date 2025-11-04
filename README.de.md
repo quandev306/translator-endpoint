@@ -38,7 +38,9 @@ Beispielantwort:
 ```
 
 ## Erweiterte Konfiguration
-- Mit `MODEL_NAME` können Sie ein anderes Modell setzen, z. B. `MODEL_NAME=facebook/nllb-200-distilled-1.3B`.
+- Setzen Sie `TRANSLATOR_MODEL` (oder aus Kompatibilitätsgründen `MODEL_NAME`), um ein anderes Modell zu wählen, z. B. `TRANSLATOR_MODEL=facebook/nllb-200-distilled-1.3B`.
+- Setzen Sie `MAX_INPUT_LENGTH`, um die maximale Länge der Eingabetokens festzulegen (Standard 512).
+- Dank python-dotenv können diese Variablen bequem in einer `.env`-Datei hinterlegt werden.
 - Der Container ermittelt unterstützte Sprachcodes automatisch über den Tokenizer; ungültige `src`/`tgt` Werte führen zu HTTP 400.
 
 ## Hinweise

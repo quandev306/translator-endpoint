@@ -38,7 +38,9 @@ curl "http://localhost:1111/translate?q=Hola&src=spa_Latn&tgt=eng_Latn"
 ```
 
 ## 고급 설정
-- `MODEL_NAME` 값을 지정해 다른 모델을 사용할 수 있습니다 (예: `MODEL_NAME=facebook/nllb-200-distilled-1.3B`).
+- `TRANSLATOR_MODEL` (또는 호환용 `MODEL_NAME`) 값을 지정해 다른 모델을 사용할 수 있습니다 (예: `TRANSLATOR_MODEL=facebook/nllb-200-distilled-1.3B`).
+- `MAX_INPUT_LENGTH` 값을 설정해 입력 토큰 길이 상한을 조정합니다 (기본값 512).
+- python-dotenv 을 통해 `.env` 파일에 설정한 환경 변수를 자동으로 불러옵니다.
 - 컨테이너는 tokenizer에서 지원 언어 코드를 자동으로 감지하며, 범위 밖의 `src`/`tgt` 는 HTTP 400 오류를 반환합니다.
 
 ## 참고

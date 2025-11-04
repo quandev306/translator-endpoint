@@ -38,7 +38,9 @@ curl "http://localhost:1111/translate?q=Hola&src=spa_Latn&tgt=eng_Latn"
 ```
 
 ## 高级配置
-- 通过设置 `MODEL_NAME` 更换模型，例如 `MODEL_NAME=facebook/nllb-200-distilled-1.3B`。
+- 设置 `TRANSLATOR_MODEL`（兼容保留 `MODEL_NAME`）以更换模型，例如 `TRANSLATOR_MODEL=facebook/nllb-200-distilled-1.3B`。
+- 设置 `MAX_INPUT_LENGTH` 以限制输入 token 数量（默认 512）。
+- 借助 python-dotenv，可自动加载 `.env` 文件中的这些环境变量。
 - 容器会从 tokenizer 自动发现受支持的语言代码；`src`/`tgt` 超出范围时会返回 HTTP 400 错误。
 
 ## 注意事项

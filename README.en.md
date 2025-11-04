@@ -38,7 +38,9 @@ Sample response:
 ```
 
 ## Advanced Configuration
-- Set `MODEL_NAME` to switch models, e.g. `MODEL_NAME=facebook/nllb-200-distilled-1.3B`.
+- Set `TRANSLATOR_MODEL` (or legacy `MODEL_NAME`) to switch models, e.g. `TRANSLATOR_MODEL=facebook/nllb-200-distilled-1.3B`.
+- Set `MAX_INPUT_LENGTH` to cap the tokenized input length (default 512).
+- Store these variables in a `.env` file; the app loads it automatically via python-dotenv.
 - The container discovers supported language codes from the tokenizer; unsupported `src`/`tgt` values trigger HTTP 400.
 
 ## Notes
