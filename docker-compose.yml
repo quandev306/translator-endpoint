@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  translator:
+    build: .
+    container_name: nllb-translator
+    ports:
+      - "1111:1111"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4G
